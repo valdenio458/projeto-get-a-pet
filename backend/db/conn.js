@@ -1,13 +1,13 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-async function main() {
+const connectToDataBase = async () => {
   await mongoose.connect('mongodb://localhost:27017/getapet')
   console.log('Connected to MongoDB!');
 }
 
-main().catch((err) =>  
+connectToDataBase().catch((err) =>  
   console.error(err));
 
-export default mongoose;
+module.exports = mongoose;
 
 
