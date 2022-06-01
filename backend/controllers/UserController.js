@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const createUserToken = require('../helpers/createUserToken');
+
 
 class UserController {
   static register = async(req, res) => { 
@@ -40,10 +42,8 @@ class UserController {
       });
 
       const newUser = await user.save();
-      return res.status(201).json({
-        message: 'User created successfully',
-        newUser
-      });
+      
+      await createUserToken(newUser, req, res);
 
     } catch (err) {
       console.log('userExistsError:', err);
